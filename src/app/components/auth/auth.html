@@ -1,0 +1,22 @@
+<h2>Page d'authentification</h2>
+<form (ngSubmit)="seConnecter()" #form="ngForm">
+    <div>
+        <label for="username">Nom d'utilisateur</label>
+        <input type="text" id="username" [(ngModel)]="user.username" name="username">
+    </div>
+    <div>
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" [(ngModel)]="user.password" name="password">
+    </div>
+
+    <div>
+        <button class="btn">
+            <i class="fa-solid fa-right-to-bracket"></i>
+        </button>
+    </div>
+</form>
+@if (erreur) {
+<div class="row alert alert-danger">
+    {{ erreur }}
+</div>
+}
