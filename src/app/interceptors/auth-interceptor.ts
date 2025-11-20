@@ -7,7 +7,7 @@ import { User } from '../models/user';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const jwtService = inject(JwtService);
 
-  if (req.url == `${environment.BACKEND_URL}/authenticate`) {
+  if (req.url == `${environment.BACKEND_URL}/authenticate` || req.url == `${environment.BACKEND_URL}/register`) {
     return next(req);
   }
 

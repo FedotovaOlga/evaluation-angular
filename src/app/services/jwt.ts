@@ -10,11 +10,13 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root',
 })
 export class JwtService {
+
   constructor(private http: HttpClient) {}
 
   getTokens(user: User): Observable<Jwt> {
     return this.http.post<Jwt>(`${environment.BACKEND_URL}/authenticate`, user);
   }
+
   isValid(token: string): boolean {
     const now = Math.floor(Date.now() / 1000);
 
@@ -23,4 +25,12 @@ export class JwtService {
 
     return exp > now;
   }
+
+  register(user: User): Observable<Jwt> {
+    return this.http.post<Jwt>(`${environment.BACKEND_URL}/register`, {
+      username: user.username,
+      password: user.password
+    });
+  }
+
 }
