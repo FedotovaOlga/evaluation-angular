@@ -1,18 +1,41 @@
-<h3>Ajouter une nouvelle formation</h3>
-<div>
-  <input type="text" placeholder="Titre" [(ngModel)]="formation.titre">
-  <input type="date" placeholder="Date de début" [(ngModel)]="formation.dateDebut">
-  <input type="number" placeholder="Durée (nombre de jours)" [(ngModel)]="formation.duree">
-  <button class="btn" (click)="ajouter()">
-    <i class="fa-solid fa-plus"></i>
-  </button>
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <h2 class="text-center mb-3">Ajouter une nouvelle formation</h2>
+    <div>
+      <form class="card card-body mb-4 shadow-sm" (ngSubmit)="ajouter()">
+        <div class="row g-2 align-items-end">
+          <div class="col-md-5">
+            <label class="form-label">Titre</label>
+            <input name="titre" class="form-control" type="text" placeholder="Titre" [(ngModel)]="formation.titre" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Date de début</label>
+            <input name="dateDebut" type="date" class="form-control" placeholder="Date de début" [(ngModel)]="formation.dateDebut"
+              required>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Durée (jours)</label>
+            <input name="duree" class="form-control" type="number" placeholder="Durée (nombre de jours)"
+              [(ngModel)]="formation.duree" required>
+          </div>
+          <div class="col-md-1 d-grid">
+            <button class="btn btn-primary mt-2 mt-md-0" type="submit">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <h2 class="mt-4">Liste des formations</h2>
+    <ul class="list-group">
+      @for (f of formations; track $index) {
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <app-formation [formation]="f" />
+        <button class="text-danger btn" (click)="supprimer($index, f.id)">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      </li>
+      }
+    </ul>
+  </div>
 </div>
-<h3>Liste des formations</h3>
-<ul>
-  @for (f of formations; track $index) {
-  <app-formation [formation]="f" />
-  <button class="text-danger btn" (click)="supprimer($index, f.id)">
-    <i class="fa-solid fa-trash-can"></i>
-  </button>
-  }
-</ul>

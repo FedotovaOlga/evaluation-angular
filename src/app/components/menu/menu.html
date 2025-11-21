@@ -1,14 +1,16 @@
-<nav class="nav my-2 container">
+<nav class="container my-3 d-flex align-items-center gap-3 p-2 border rounded bg-light shadow-sm">
+
   <a class="nav-link" routerLinkActive="active-link" routerLink="/" [routerLinkActiveOptions]="{exact:true}">Accueil</a>
   @if (isLoggedIn$ | async) {
 
-    <a class="nav-link" routerLinkActive="active-link" routerLink="/formations">Formations</a>
-    <button (click)="authState.logout()">Se déconnecter</button>
+  <a class="nav-link" routerLinkActive="active-link" routerLink="/formations">Formations</a>
+  <button class="btn btn-outline-danger btn-sm ms-auto" (click)="authState.logout()">Se déconnecter</button>
   }
+  
   @else {
-    <a class="nav-link" routerLinkActive="active-link" routerLink="/auth">
-      Connexion
-    </a>
+  <a class="btn btn-outline-primary btn-sm ms-auto" routerLinkActive="active-link" routerLink="/auth">
+    Connexion
+  </a>
   }
 
 </nav>

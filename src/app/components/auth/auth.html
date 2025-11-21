@@ -1,52 +1,65 @@
-<h2>Page d'authentification / inscription</h2>
-<div>
-  <button [class.active]="mode === 'login'" (click)="switchMode('login')">Se connecter</button>
-  <button [class.active]="mode === 'signup'" (click)="switchMode('signup')">Créer un compte</button>
-</div>
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-5">
+    <h1 class="text-center mb-4">Page d'authentification / inscription</h1>
+    <div class="card shadow-sm">
+      <div class="card-body">
 
-@if (mode === 'login') {
-  <form (ngSubmit)="seConnecter()" #loginForm="ngForm">
-      <div>
-          <label for="username">Identifiant</label>
-          <input type="text" id="username" [(ngModel)]="user.username" name="username">
-      </div>
-      <div>
-          <label for="password">Mot de passe</label>
-          <input type="password" id="password" [(ngModel)]="user.password" name="password">
-      </div>
+        <!-- Onglets connexion / inscription -->
+        <ul class="nav nav-tabs nav-justified mb-4">
+          <li class="nav-item">
+            <button class="nav-link" [class.active]="mode === 'login'" (click)="switchMode('login')">Se
+              connecter</button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" [class.active]="mode === 'signup'" (click)="switchMode('signup')">Créer un
+              compte</button>
+          </li>
+        </ul>
 
-      <div>
-          <button class="btn">
-              <i class="fa-solid fa-right-to-bracket"></i>
+        @if (mode === 'login') {
+        <form (ngSubmit)="seConnecter()" #loginForm="ngForm">
+          <div class="mb-3">
+            <label class="form-label" for="username">Identifiant</label>
+            <input type="text" class="form-control" id="username" [(ngModel)]="user.username" name="username">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="password">Mot de passe</label>
+            <input class="form-control" type="password" id="password" [(ngModel)]="user.password" name="password">
+          </div>
+          <button class="btn btn-primary w-100">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Se connecter
           </button>
-      </div>
-  </form>
-}
+        </form>
+        }
 
-@else {
-  <form #signupForm="ngForm" (ngSubmit)="creerCompte(signupForm)">
-      <div>
-          <label for="username">Identifiant</label>
-          <input type="text" id="username" [(ngModel)]="user.username" name="username">
-      </div>
-      <div>
-          <label for="password">Mot de passe</label>
-          <input type="password" id="password" [(ngModel)]="user.password" name="password">
-      </div>
+        @else {
+        <form #signupForm="ngForm" (ngSubmit)="creerCompte(signupForm)">
+          <div class="mb-3">
+            <label class="form-label" for="username">Identifiant</label>
+            <input class="form-control" type="text" id="username" [(ngModel)]="user.username" name="username">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="password">Mot de passe</label>
+            <input class="form-control" type="password" id="password" [(ngModel)]="user.password" name="password">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="confirmPassword">Confirmer le mot de passe</label>
+            <input class="form-control" type="password" id="confirmPassword" [(ngModel)]="confirmPassword"
+              name="confirmPassword">
+          </div>
+
           <div>
-          <label for="confirmPassword">Confirmer le mot de passe</label>
-          <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword">
-      </div>
-
-      <div>
-          <button class="btn" type="submit">
+            <button class="btn btn-primary w-100" type="submit">
               Créer mon compte
-          </button>
+            </button>
+          </div>
+        </form>
+        }
+        @if (erreur) {
+        <div class="row alert alert-danger mt-3 mb-0">
+          {{ erreur }}
+        </div>
+        }
       </div>
-  </form>
-}
-@if (erreur) {
-<div class="row alert alert-danger">
-    {{ erreur }}
-</div>
-}
+    </div>
