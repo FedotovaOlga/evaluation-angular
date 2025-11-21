@@ -17,8 +17,20 @@ export class FormationsComponent {
     dateDebut: '',
     duree: 0
   }
+  erreur: string | null = null;
 
   constructor(private fs: FormationService) {}
+
+  ngOnInit() {
+    this.fs.getFormations().subscribe({
+      next: (res) => (this.formations = res),
+      error: (err) => {
+        this.erreur = "Liste des formations temporairement indisponible"
+        console.log(this.erreur);
+
+      }
+    })
+  }
 
   ajouter() {
     this.fs.save(this.formation).subscribe(res => {

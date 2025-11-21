@@ -1,1 +1,18 @@
 <p ngClass="text-primary my-5">Bienvenue dans cette application Formations</p>
+<h3>Liste des formations</h3>
+<ul>
+  @for (f of formations; track $index) {
+  <app-formation [formation]="f" />
+  }
+  @if (isLoggedIn$ | async) {
+    <button  class="btn btn-primary" routerLink="/formations">
+        Gérer les formations
+    </button>
+  }
+  @else {
+        <button class="btn btn-primary" routerLink="/auth">
+        Se connecter pour gérer les formations
+    </button>
+  }
+
+</ul>
